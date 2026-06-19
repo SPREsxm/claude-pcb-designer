@@ -1,0 +1,23 @@
+{
+  "skill_name": "pcb-designer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm building an ESP32-S3 based data logger with an ICM-42688-P IMU (SPI), BMM150 magnetometer (I2C), and a microSD card (SPI). The board is 50x30mm, battery powered with a 3.7V LiPo. I need a component list and placement recommendations for a 4-layer PCB. I'm using 立创 EDA.",
+      "expected_output": "A component list with LCSC part numbers, a block diagram showing component placement, and 4-layer stackup recommendations.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Review this PCB layout for me: it's a 2-layer board with ESP32-WROOM-32, a GPS module on UART, and a LoRa radio on SPI. The antenna keep-out zone has some I2C pull-up resistors placed inside it. Also the I2C bus runs parallel to the SPI clock line for about 25mm. Is this going to cause problems?",
+      "expected_output": "A DFM/design review identifying the antenna keep-out violation and I2C/SPI crosstalk risk, with specific recommendations to fix each issue.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I want to order my PCB from JLCPCB with assembly. I've finished my design in 立创 EDA. What exact files do I need to export, what format should they be in, and what common mistakes should I check before uploading? My board has 30 components, mostly 0603 passives and a few QFN ICs.",
+      "expected_output": "A step-by-step LCEDA export guide listing exact file types (Gerber RS-274X, Excellon drill, BOM CSV, CPL/ Pick&Place), file format requirements, and a pre-submission checklist of common JLCPCB assembly issues.",
+      "files": []
+    }
+  ]
+}
