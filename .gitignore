@@ -1,15 +1,47 @@
-# OS files
+# ─── OS Generated ──────────────────────────────────────────
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Editor files
+# ─── Editor / IDE ──────────────────────────────────────────
 *.swp
 *.swo
 *~
 .vscode/
 .idea/
 
-# Temporary files
+# ─── Backup Files ──────────────────────────────────────────
+*.bak
+*.orig
 *.tmp
 *.log
+
+# ─── EDA Project Files (don't accidentally commit designs) ──
+*.epro
+*.esch
+*.epcb
+*.kicad_pro
+*.kicad_sch
+*.kicad_pcb
+*.kicad_prl
+*.pro
+*.sch
+*.pcb
+
+# ─── Export / Manufacturing Artifacts ───────────────────────
+*.gbr
+*.drl
+*.gko
+*.gbl
+*.gtl
+*.gbs
+*.gts
+*.gto
+*.gbo
+*.gml
+*.csv
+*.zip
+
+# ─── Sensitive ──────────────────────────────────────────────
+.env
+.env.*

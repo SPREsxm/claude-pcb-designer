@@ -1,22 +1,38 @@
 {
   "skill_name": "pcb-designer",
+  "version": "2.0.0",
   "evals": [
     {
       "id": 1,
-      "prompt": "I'm building an ESP32-S3 based data logger with an ICM-42688-P IMU (SPI), BMM150 magnetometer (I2C), and a microSD card (SPI). The board is 50x30mm, battery powered with a 3.7V LiPo. I need a component list and placement recommendations for a 4-layer PCB. I'm using 立创 EDA.",
-      "expected_output": "A component list with LCSC part numbers, a block diagram showing component placement, and 4-layer stackup recommendations.",
+      "prompt": "I'm building an ESP32-S3 based flight computer / data logger with an ICM-42688-P IMU (SPI), KX134-1211 accelerometer (SPI), MMC5983MA magnetometer (SPI), MS5611 barometer (I2C), WS2812B RGB LED, and a microSD card (SPI). The board is 50×35mm, battery powered with a 3.7V LiPo, and needs a TP4056 charger + MT2492 buck converter for 3.3V. I need a component list and placement recommendations for a 4-layer PCB. I'm using 立创 EDA.",
+      "expected_output": "A component list with LCSC part numbers, a block diagram showing component placement, 4-layer stackup recommendations (L1 signal, L2 GND, L3 3.3V power, L4 signal), sensor bus routing rules (SPI star topology with 22Ω termination), and antenna keep-out zone requirements.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": ["ESP32-S3", "50×35mm", "4-layer", "TP4056", "MT2492", "22Ω", "star topology", "antenna keep-out", "GND plane", "3.3V"],
+        "min_keywords_matched": 7
+      },
       "files": []
     },
     {
       "id": 2,
       "prompt": "Review this PCB layout for me: it's a 2-layer board with ESP32-WROOM-32, a GPS module on UART, and a LoRa radio on SPI. The antenna keep-out zone has some I2C pull-up resistors placed inside it. Also the I2C bus runs parallel to the SPI clock line for about 25mm. Is this going to cause problems?",
-      "expected_output": "A DFM/design review identifying the antenna keep-out violation and I2C/SPI crosstalk risk, with specific recommendations to fix each issue.",
+      "expected_output": "A DFM/design review identifying the antenna keep-out violation (any copper/components in 15×15mm zone degrades WiFi), I2C/SPI crosstalk risk (parallel 25mm violates 3W spacing rule), with specific recommendations: move resistors out of keep-out, add spacing or ground guard between I2C and SPI, and consider 4-layer for better signal isolation.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": ["antenna keep-out", "15mm", "crosstalk", "3W", "spacing", "guard trace", "parallel", "4-layer"],
+        "min_keywords_matched": 5
+      },
       "files": []
     },
     {
       "id": 3,
       "prompt": "I want to order my PCB from JLCPCB with assembly. I've finished my design in 立创 EDA. What exact files do I need to export, what format should they be in, and what common mistakes should I check before uploading? My board has 30 components, mostly 0603 passives and a few QFN ICs.",
-      "expected_output": "A step-by-step LCEDA export guide listing exact file types (Gerber RS-274X, Excellon drill, BOM CSV, CPL/ Pick&Place), file format requirements, and a pre-submission checklist of common JLCPCB assembly issues.",
+      "expected_output": "A step-by-step LCEDA export guide listing exact file types (Gerber RS-274X with GTL/GBL/GTS/GBS/GTO/GBO/GKO/TXT layers, Excellon drill, BOM CSV with LCSC # column, CPL Pick & Place file), file format requirements, a pre-submission checklist covering board outline, silkscreen clearance, fiducial marks, component orientation, and common JLCPCB assembly issues.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": ["Gerber", "RS-274X", "Excellon", "GKO", "BOM", "CPL", "Pick & Place", "fiducial", "board outline", "solder mask"],
+        "min_keywords_matched": 7
+      },
       "files": []
     }
   ]

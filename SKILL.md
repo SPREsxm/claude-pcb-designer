@@ -71,6 +71,7 @@ Pairs with `easyeda-api-skill` for automated EDA control.
 | Manufacturing & production | `references/manufacturing-production.md` |
 | MCU platform references | `references/mcu-platforms.md` |
 | PCB materials & processes | `references/pcb-materials.md` |
+| Cost optimization | `references/cost-optimization.md` |
 
 ---
 
@@ -628,24 +629,14 @@ See `references/testing-debug.md`.
 
 ## 21. Cost Optimization
 
-### BOM Cost Reduction
-1. **Replace extended parts** with basic parts (saves ¥3/part on JLCPCB)
-2. **Reduce unique values**: e.g., use 10kΩ everywhere, 0.1µF everywhere
-3. **Increase package size**: 0805 cheaper than 0402
-4. **Remove non-critical parts**: status LEDs, extra test points, optional filters
-5. **Source from multiple suppliers**: LCSC + Digi-Key price comparison
+See `references/cost-optimization.md` for full analysis.
 
-### PCB Cost Reduction
-1. **Panelization**: maximize panel utilization
-2. **Reduce layers**: 2L vs 4L saves ~¥25/board at small qty
-3. **Smaller board**: every mm² counts
-4. **Single-sided SMT**: if possible (¥ savings on assembly)
-5. **V-cut over router**: cheaper for rectangular panels
-
-### Assembly Cost
-1. **Fewer unique parts** → fewer feeder slots → faster setup
-2. **Single-sided placement** if possible
-3. **Standardize orientation**: all ICs pin-1 same direction
+### Quick Wins
+- **LCSC Basic Parts**: save ¥3/part vs extended library
+- **Consolidate values**: fewer unique resistor/capacitor values
+- **≤100×100mm**: JLCPCB's cheapest PCB tier
+- **V-cut** over router for rectangular panels
+- **Single-sided SMT** if possible (2× setup cost for double-sided)
 
 ---
 

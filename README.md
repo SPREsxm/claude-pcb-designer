@@ -39,7 +39,7 @@ Ask Claude anything about PCB design, and it draws from 17 reference documents c
 <tr><td>🧠 <b>MCU Platforms</b></td><td>ESP32-S3/C3/C6, STM32 F1/F4/G0/H7, nRF52/53/54, RP2040/RP2350, CH32V, ATmega</td></tr>
 
 <tr><th colspan="2">🏭 Manufacturing & Production</th></tr>
-<tr><td>⚙️ <b>DFM</b></td><td>94-point checklist: clearances, annular rings, silkscreen, thermal relief, acid traps</td></tr>
+<tr><td>⚙️ <b>DFM</b></td><td>94-point checklist: schematic → layout → pours → RF → silkscreen → power → HS → mechanical → export</td></tr>
 <tr><td>📐 <b>Materials</b></td><td>FR-4 vs Rogers/Isola, ENIG vs HASL vs OSP, HDI microvias, FPC, rigid-flex, metal-core</td></tr>
 <tr><td>🏭 <b>Production</b></td><td>Stencil aperture design, SAC305 reflow profile, SPI/AOI/X-ray inspection, panelization, ESD packaging</td></tr>
 
@@ -49,6 +49,7 @@ Ask Claude anything about PCB design, and it draws from 17 reference documents c
 <tr><td>⚡ <b>EMC</b></td><td>Return paths, decoupling loop area, SPI termination, GND stitching, antenna keep-out</td></tr>
 
 <tr><th colspan="2">📦 Patterns & Workflows</th></tr>
+<tr><td>💰 <b>Cost</b></td><td>BOM optimization, PCB fab & assembly cost reduction, panel utilization, quantity vs price analysis</td></tr>
 <tr><td>📦 <b>10+ Circuits</b></td><td>ESP32 boot, SPI star bus, I2C bus, LiPo charger, DC-DC buck, USB-C ESD, buzzer driver, battery ADC</td></tr>
 <tr><td>🎨 <b>EDA Tools</b></td><td>立创 EDA Pro (primary) + KiCad 8.x — with keyboard shortcuts and export workflows</td></tr>
 </table>
@@ -89,6 +90,9 @@ Claude invokes the skill automatically and applies the right reference documents
 ├── SKILL.md                        ← 23 modules, main skill logic
 ├── README.md
 ├── LICENSE (MIT)
+├── .gitignore
+├── evals/
+│   └── evals.json
 └── references/
     ├── lceda-workflow.md           ← 立创 EDA Pro: schematic → PCB → Gerber
     ├── kicad-workflow.md           ← KiCad 8.x alternative
@@ -104,7 +108,10 @@ Claude invokes the skill automatically and applies the right reference documents
     ├── manufacturing-production.md ← Stencil, reflow, SPI/AOI, panelization
     ├── mcu-platforms.md            ← ESP32/STM32/nRF/RP2040/CH32V reference
     ├── pcb-materials.md            ← FR-4, Rogers, ENIG, HDI, FPC, metal-core
+    ├── cost-optimization.md        ← BOM, PCB fab, and assembly cost reduction
     ├── dfm-checklist.md            ← 94-point pre-export check
+    ├── evals/
+    │   └── evals.json              ← Evaluation prompts with rubrics
     ├── emc-guidelines.md           ← Return paths, decoupling, termination
     └── layer-choice.md             ← 2L vs 4L decision matrix
 ```
