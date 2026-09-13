@@ -2,6 +2,10 @@
 
 Reduce BOM, PCB fabrication, and assembly costs without compromising quality.
 
+The numerical examples below are illustrative and region/date dependent.
+Confirm current pricing, setup fees, surcharges, and panel rules with the
+selected supplier before making a business decision.
+
 ---
 
 ## BOM Cost Reduction

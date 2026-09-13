@@ -1,0 +1,48 @@
+name: Validate
+
+on:
+  push:
+    branches: ["master", "main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.10", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Validate skill package
+        run: python scripts/validate_skill.py .
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Compile scripts
+        run: python -m compileall -q scripts tests
+
+      - name: Smoke-test calculator
+        run: python scripts/pcbcalc.py microstrip --height-mm 0.20 --er 4.3 --target-ohm 50
+
+      - name: Smoke-test package builder
+        run: python scripts/package_skill.py --output dist/pcb-designer-test.zip

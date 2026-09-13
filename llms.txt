@@ -1,0 +1,29 @@
+# PCB Designer
+
+> An open Agent Skill for PCB design, review, calculation, and fabrication
+> release auditing.
+
+Repository: https://github.com/SPREsxm/claude-pcb-designer
+License: MIT
+Version: 3.0.0
+
+## Primary Files
+
+- [Skill entrypoint](https://github.com/SPREsxm/claude-pcb-designer/blob/master/SKILL.md)
+- [English README](https://github.com/SPREsxm/claude-pcb-designer/blob/master/README.md)
+- [Chinese README](https://github.com/SPREsxm/claude-pcb-designer/blob/master/README.zh-CN.md)
+- [Contributing](https://github.com/SPREsxm/claude-pcb-designer/blob/master/CONTRIBUTING.md)
+- [Changelog](https://github.com/SPREsxm/claude-pcb-designer/blob/master/CHANGELOG.md)
+
+## Tools
+
+- PCB planning calculator: `scripts/pcbcalc.py`
+- Fabrication release auditor: `scripts/audit_release.py`
+- Skill package validator: `scripts/validate_skill.py`
+- Cross-agent installer: `scripts/install.py`
+
+## Topics
+
+PCB design, hardware engineering, embedded systems, schematic review, layout
+review, DFM, EMC, signal integrity, power electronics, thermal design, EasyEDA,
+嘉立创EDA, KiCad, Gerber, JLCPCB, AI agents, Codex skill, Claude skill.

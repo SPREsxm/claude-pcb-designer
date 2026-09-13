@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest a new calculator, reference, template, or workflow.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What design or review problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Include equations, standards, or datasheet references when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Links or references that support the request.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Calculator
+        - Release auditor
+        - Reference
+        - Template
+        - EDA workflow
+        - Documentation
+        - Other
+    validations:
+      required: true

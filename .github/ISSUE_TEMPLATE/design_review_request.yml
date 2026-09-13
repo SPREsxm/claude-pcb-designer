@@ -1,0 +1,36 @@
+name: Design review request
+description: Ask for a structured PCB design review.
+title: "[Review]: "
+labels: ["design-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share only material you can license publicly. Remove private nets,
+        customer names, credentials, and proprietary constraints.
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements
+      description: Function, power, interfaces, environment, volume, and target fab.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Files
+      description: Link the schematic, layout, stackup, BOM, and DRC report.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Known risks
+      description: What worries you most?
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: This project is not mains, battery, medical, automotive, aviation, or space critical.
+          required: false

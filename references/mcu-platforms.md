@@ -27,6 +27,11 @@
 
 ## ESP32 Family
 
+The tables below are planning examples. Pin functions, strapping behavior, and
+flash/PSRAM availability vary by exact module, package, and silicon revision.
+Verify against the current datasheet, TRM, and module datasheet before assigning
+pins.
+
 ### ESP32-S3 (Recommended for New Designs)
 - Dual-core Xtensa LX7 @ 240MHz
 - WiFi 4 (802.11 b/g/n), BLE 5.0

@@ -1,15 +1,18 @@
-# 立创 EDA (LCEDA) Workflow
+# 嘉立创EDA / EasyEDA Workflow
+
+The English product name is **EasyEDA**. The Chinese name is **嘉立创EDA**.
+Use "EasyEDA Pro" only when referring to the professional edition.
 
 ## Choosing the Right Version
 
 | Version | Use case | Pros | Cons |
 |---------|----------|------|------|
-| **LCEDA Pro** (离线客户端) | Multi-sheet, complex designs | Fast, full-featured, offline | Windows/Linux only |
-| **LCEDA Standard** (Web) | Quick prototypes, single-sheet | No install, easy sharing | Slower, limited for large designs |
-| **EasyEDA** (International) | Same as Standard, English UI | Same as Standard | Less LCSC integration |
+| **EasyEDA Pro** (desktop client) | Multi-sheet, complex designs | Fast, full-featured, offline | Windows/Linux only |
+| **EasyEDA Standard** (web) | Quick prototypes, single-sheet | No install, easy sharing | Slower, limited for large designs |
+| **EasyEDA** international UI | Same as Standard, English UI | Same as Standard | Less LCSC integration |
 
-**Recommendation**: Use LCEDA Pro for the Rocket Black Box and any design
-with more than ~20 components.
+**Recommendation**: Use EasyEDA Pro for boards with more than roughly 20
+components or for designs that need offline editing and multi-sheet capture.
 
 ## LCEDA Pro Workflow
 
@@ -35,7 +38,7 @@ with more than ~20 components.
 1. **Convert schematic to PCB**: 设计 → 更新PCB (Update PCB)
 2. **Set board outline**: Draw on mechanical layer or use 板框工具
 3. **Place components**: Rough placement first, then refine
-4. **Route traces**: 
+4. **Route traces**:
    - `Ctrl+W` or click 布线 to start routing
    - `Tab` during routing to change width
    - `Shift+S` to show only current layer
@@ -51,7 +54,11 @@ with more than ~20 components.
    - Include board outline layer
 2. **BOM**: 文件 → 导出 → BOM → CSV
 3. **Pick & Place (CPL)**: 文件 → 导出 → 坐标文件
-4. **Zip all files** and upload to jlcpcb.com
+4. **Zip all files** and upload to jlcpcb.com.
+5. Open the exported Gerbers in an independent viewer before ordering.
+
+Supplier menus and generated filenames can change. Confirm the current
+assembly upload template and required columns at order time.
 
 ## LCSC Part Selection Tips
 
@@ -85,7 +92,7 @@ SMD Button 6x6x5mm         C11135
 Red LED 0603               C2286
 ```
 
-## Keyboard Shortcuts (LCEDA Pro)
+## Keyboard Shortcuts (EasyEDA Pro)
 
 | Key | Action |
 |-----|--------|

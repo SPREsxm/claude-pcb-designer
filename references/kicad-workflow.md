@@ -8,7 +8,8 @@ Use KiCad when you need:
 
 ## Version
 
-Use KiCad 8.0 or later (major UI improvements in 8.x).
+Use a currently supported KiCad release. The workflow below applies to KiCad
+8.0 and later; menu names can change between major releases.
 
 ## Workflow
 
@@ -34,9 +35,12 @@ Use KiCad 8.0 or later (major UI improvements in 8.x).
 3. File → Fabrication Outputs → BOM (CSV)
 4. File → Fabrication Outputs → Component Placement (CPL)
 
-## KiCad vs LCEDA for This Project
+## KiCad vs EasyEDA for This Project
 
-| Aspect | KiCad | LCEDA |
+The correct English product name for 嘉立创EDA is **EasyEDA**. Use "EasyEDA
+Pro" only when referring to the professional edition.
+
+| Aspect | KiCad | EasyEDA |
 |--------|-------|-------|
 | LCSC parts integration | Manual (import BOM) | Built-in search |
 | JLCPCB assembly | Extra steps | One-click |
@@ -45,5 +49,5 @@ Use KiCad 8.0 or later (major UI improvements in 8.x).
 | Community plugins | Many | Few |
 | Version control | Git-friendly (text files) | Binary .epro format |
 
-**Recommendation**: Use LCEDA for this project (tighter JLCPCB integration).
+**Recommendation**: Use EasyEDA for tighter JLCPCB integration.
 Use KiCad if you plan to open-source the design or need advanced routing.

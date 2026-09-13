@@ -1,0 +1,5 @@
+rail,component,voltage_v,current_ma,duty_percent,notes
+3V3,MCU active,3.3,180,35,WiFi disabled
+3V3,IMU,3.3,3,100,Continuous
+3V3,Barometer,3.3,1,100,Continuous
+5V,Regulator input,5.0,160,100,Pre-regulation estimate

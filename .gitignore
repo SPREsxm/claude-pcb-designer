@@ -1,22 +1,31 @@
-# ─── OS Generated ──────────────────────────────────────────
+# OS generated
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# ─── Editor / IDE ──────────────────────────────────────────
+# Editors
 *.swp
 *.swo
 *~
 .vscode/
 .idea/
 
-# ─── Backup Files ──────────────────────────────────────────
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Backups and temporary files
 *.bak
 *.orig
 *.tmp
 *.log
 
-# ─── EDA Project Files (don't accidentally commit designs) ──
+# EDA project files
 *.epro
 *.esch
 *.epcb
@@ -28,20 +37,26 @@ desktop.ini
 *.sch
 *.pcb
 
-# ─── Export / Manufacturing Artifacts ───────────────────────
+# Fabrication outputs
 *.gbr
+*.gbrjob
 *.drl
 *.gko
 *.gbl
 *.gtl
-*.gbs
 *.gts
+*.gbs
 *.gto
 *.gbo
 *.gml
-*.csv
-*.zip
 
-# ─── Sensitive ──────────────────────────────────────────────
+# Common release folders
+/release/
+/release-package/
+/fabrication/
+/gerbers/
+/dist/
+
+# Secrets
 .env
 .env.*

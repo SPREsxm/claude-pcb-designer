@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "description": "Review severity and target presets used by the PCB Designer skill.",
+  "severity": {
+    "critical": "Blocks fabrication, can damage hardware, violates safety, or makes required operation impossible.",
+    "major": "Likely functional failure, low yield, reliability risk, or compliance problem.",
+    "minor": "Cost, manufacturability, serviceability, or robustness improvement.",
+    "question": "Missing information that may change the conclusion."
+  },
+  "impedance_targets": {
+    "rf_single_ended": {
+      "ohms": 50,
+      "notes": "Confirm with the actual stackup and connector/reference design."
+    },
+    "usb_high_speed": {
+      "ohms": 90,
+      "tolerance_percent": 10,
+      "notes": "Differential; minimize intra-pair skew and stubs."
+    },
+    "ethernet_mdi": {
+      "ohms": 100,
+      "tolerance_percent": 10,
+      "notes": "Follow the PHY and magnetics reference design."
+    },
+    "lvds_mipi_hdmi": {
+      "ohms": 100,
+      "tolerance_percent": 10,
+      "notes": "Protocol-specific skew and loss limits also apply."
+    }
+  },
+  "current_defaults": {
+    "external_copper_k": 0.048,
+    "internal_copper_k": 0.024,
+    "temperature_rise_c": 10,
+    "plating_thickness_um": 25,
+    "via_derating": 0.7,
+    "notes": "IPC-2221-style planning estimates. Use IPC-2152, a field solver, or measured data for critical current paths."
+  },
+  "release_required_file_groups": {
+    "copper": ["top copper", "bottom copper"],
+    "solder_mask": ["top solder mask", "bottom solder mask"],
+    "outline": ["board outline"],
+    "drill": ["drill file"],
+    "assembly": ["BOM", "CPL"]
+  },
+  "review_questions": [
+    "What is the worst-case ambient temperature inside the enclosure?",
+    "What is the maximum credible fault current and how is it cleared?",
+    "Which signals are safety-related or mission-critical?",
+    "What is the mechanical envelope and antenna keep-out?",
+    "Which standards or certifications apply?",
+    "How will the assembled board be programmed and tested?"
+  ]
+}

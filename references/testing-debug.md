@@ -27,7 +27,7 @@
 Probe pad:   │  □□□□  │  ≥1.0mm diameter
              │  □□□□  │
              └────────┘
-             
+
 Silkscreen:  "3V3"  ← Label every test point
 ```
 

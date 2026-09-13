@@ -41,17 +41,18 @@ BGA: square with rounded corners, 1:1
 ### SAC305 (Lead-Free, Most Common)
 ```
 Composition: Sn96.5 Ag3.0 Cu0.5
-Melting point: 217°C (eutectic)
-Reflow peak: 235-250°C
+Solidus: approximately 217°C
+Liquidus: approximately 220°C
+Reflow peak: typically 235-250°C, set by paste and component limits
 Type 3 (25-45µm powder): good for >0.5mm pitch
 Type 4 (20-38µm powder): for fine pitch and small apertures
 Type 5 (15-25µm powder): for ultra-fine pitch, stencil printing challenging
 ```
 
 ### Storage
-- Refrigerated: 0-10°C, shelf life 6 months
-- Warm to room temp before use (4 hours)
-- Stir before applying to stencil
+- Store according to the paste manufacturer's instructions, often refrigerated.
+- Warm to room temperature before opening to avoid condensation.
+- Follow the manufacturer's mixing, working-life, and reflow instructions.
 
 ---
 

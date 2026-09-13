@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "description": "Starting fabrication profiles for planning and automated release checks. Supplier capabilities and prices change; verify the linked source before ordering.",
+  "profiles": [
+    {
+      "id": "generic-conservative-2layer",
+      "name": "Generic conservative two-layer prototype",
+      "source_url": null,
+      "verified_on": null,
+      "verification_status": "generic",
+      "layers": 2,
+      "units": "mm",
+      "limits": {
+        "min_trace_mm": 0.15,
+        "min_space_mm": 0.15,
+        "min_drill_mm": 0.30,
+        "min_via_pad_mm": 0.60,
+        "min_annular_ring_mm": 0.15,
+        "min_copper_to_edge_mm": 0.30,
+        "min_hole_to_edge_mm": 0.30,
+        "min_solder_mask_bridge_mm": 0.15,
+        "min_silkscreen_width_mm": 0.15,
+        "min_silkscreen_height_mm": 0.80
+      },
+      "notes": [
+        "Useful for hand-soldered and low-density prototypes.",
+        "Not a substitute for the selected fabricator's design rules."
+      ]
+    },
+    {
+      "id": "generic-conservative-4layer",
+      "name": "Generic conservative four-layer prototype",
+      "source_url": null,
+      "verified_on": null,
+      "verification_status": "generic",
+      "layers": 4,
+      "units": "mm",
+      "limits": {
+        "min_trace_mm": 0.10,
+        "min_space_mm": 0.10,
+        "min_drill_mm": 0.20,
+        "min_via_pad_mm": 0.45,
+        "min_annular_ring_mm": 0.13,
+        "min_copper_to_edge_mm": 0.30,
+        "min_hole_to_edge_mm": 0.30,
+        "min_solder_mask_bridge_mm": 0.10,
+        "min_silkscreen_width_mm": 0.15,
+        "min_silkscreen_height_mm": 0.80
+      },
+      "notes": [
+        "Use a continuous reference plane for controlled-impedance and RF designs.",
+        "Confirm inner-layer copper weight and dielectric thickness."
+      ]
+    },
+    {
+      "id": "jlcpcb-common",
+      "name": "JLCPCB common prototype starting point",
+      "source_url": "https://jlcpcb.com/capabilities/pcb-capabilities",
+      "verified_on": null,
+      "verification_status": "unverified",
+      "layers": 4,
+      "units": "mm",
+      "limits": {
+        "min_trace_mm": 0.09,
+        "min_space_mm": 0.09,
+        "min_drill_mm": 0.20,
+        "min_via_pad_mm": 0.45,
+        "min_annular_ring_mm": 0.13,
+        "min_copper_to_edge_mm": 0.30,
+        "min_hole_to_edge_mm": 0.30,
+        "min_solder_mask_bridge_mm": 0.10,
+        "min_silkscreen_width_mm": 0.15,
+        "min_silkscreen_height_mm": 0.80
+      },
+      "notes": [
+        "Values are planning defaults remembered from common JLCPCB capability pages.",
+        "Always download or enter the current JLCPCB rules and confirm the selected process.",
+        "Advanced processes such as small vias, via-in-pad, and impedance control may cost more."
+      ]
+    },
+    {
+      "id": "generic-osh-park",
+      "name": "OSH Park-style two-layer prototype",
+      "source_url": "https://docs.oshpark.com/services/two-layer/",
+      "verified_on": null,
+      "verification_status": "unverified",
+      "layers": 2,
+      "units": "mm",
+      "limits": {
+        "min_trace_mm": 0.1524,
+        "min_space_mm": 0.1524,
+        "min_drill_mm": 0.3302,
+        "min_via_pad_mm": 0.6858,
+        "min_annular_ring_mm": 0.1524,
+        "min_copper_to_edge_mm": 0.254,
+        "min_hole_to_edge_mm": 0.254,
+        "min_solder_mask_bridge_mm": 0.1524,
+        "min_silkscreen_width_mm": 0.1524,
+        "min_silkscreen_height_mm": 0.8128
+      },
+      "notes": [
+        "Use the current OSH Park service page for final values and process limits.",
+        "The profile is intended only as a planning comparison."
+      ]
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 # Power Design: LDO, DC-DC, Battery Management
 
+Use the component datasheet and reference design as the final authority. The
+parts and numbers below are starting points for planning.
+
 ## LDO Selection
 
 ### Step-by-Step

@@ -1,7 +1,9 @@
 # DFM (Design for Manufacturing) Checklist — 94-Point
 
-Use this checklist before exporting Gerber files. Target fab: JLCPCB.
-Each unchecked item is a potential manufacturing failure or yield loss.
+Use this checklist before exporting Gerber files. The limits shown are a
+generic starting point, not a current statement of any supplier's capability.
+Choose a profile in `rules/fab-profiles.json`, verify it at order time, and
+replace it with the selected fabricator's rules whenever possible.
 
 ---
 
@@ -28,7 +30,8 @@ Each unchecked item is a potential manufacturing failure or yield loss.
 
 - [ ] 1. All ICs have power connected — verify every VDD/VCC/VDDIO pin
 - [ ] 2. All ICs have GND connected — verify every VSS/GND pin
-- [ ] 3. Decoupling caps (0.1µF) on every VDD pin, placed within 5mm of the pin
+- [ ] 3. Decoupling follows the datasheet for every power pin and is placed as
+      close as practical to the pin/power-ground pair
 - [ ] 4. No unconnected CMOS inputs — floating inputs cause oscillation and excess current
 - [ ] 5. No unconnected pins labeled "NC" that actually need pull-up/down
 - [ ] 6. Pin conflicts resolved — no two peripheral functions share the same GPIO
@@ -53,7 +56,8 @@ Each unchecked item is a potential manufacturing failure or yield loss.
 - [ ] 22. DRC rules match fab capabilities (trace/space, annular ring, hole size)
 - [ ] 23. Via annular rings ≥ 0.15mm (≥ 0.2mm for mechanical reliability)
 - [ ] 24. Via holes ≥ 0.3mm (smaller costs extra, may reduce yield)
-- [ ] 25. No vias under components unless tented AND component datasheet allows it
+- [ ] 25. Vias under components follow the assembly and datasheet rules;
+      via-in-pad is filled and capped where required
 - [ ] 26. No acute angles on traces — all turns ≥ 90° use 45° or arc transitions
 - [ ] 27. Silkscreen text height ≥ 0.8mm (≥ 1.0mm recommended for readability)
 - [ ] 28. Silkscreen line width ≥ 0.15mm (≥ 0.2mm recommended)
@@ -77,9 +81,11 @@ Each unchecked item is a potential manufacturing failure or yield loss.
 
 ### 4. Antenna & RF (items 43–50)
 
-- [ ] 43. 15mm × 15mm keep-out zone around PCB antenna — NO copper on ANY layer
+- [ ] 43. Antenna keep-out follows the exact module datasheet, including copper
+      and metal on every affected layer
 - [ ] 44. Antenna at board edge, facing outward (not toward board center)
-- [ ] 45. No metal objects near antenna — battery, USB connector, mounting holes ≥ 15mm away
+- [ ] 45. No metal objects near the antenna inside the clearance specified by
+      the exact module datasheet or antenna vendor
 - [ ] 46. GND plane void under antenna zone on all layers
 - [ ] 47. No copper pour or traces in antenna keep-out on ANY layer
 - [ ] 48. Antenna matching network populated OR 0Ω jumper in place (if tunable)
@@ -110,7 +116,8 @@ Each unchecked item is a potential manufacturing failure or yield loss.
 - [ ] 64. Battery reverse-polarity protection present (Schottky, P-FET, or PTC + TVS)
 - [ ] 65. Fuse or PTC on battery input rated for expected max current × 1.5
 - [ ] 66. Voltage sense/ADC lines are Kelvin-connected (separate from power path)
-- [ ] 67. High-current paths use multiple vias (1 via per ~1A at 0.3mm hole)
+- [ ] 67. High-current via arrays are sized with a current/temperature model,
+      not a single rule-of-thumb via count
 - [ ] 68. Power input connector rated for expected current with 50% margin
 - [ ] 69. No single-point-of-failure: multiple GND vias at power entry
 

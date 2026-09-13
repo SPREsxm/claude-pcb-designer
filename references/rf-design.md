@@ -87,7 +87,7 @@ RF_IC ──┬──[===]──┬── ANT
 
 ## Antenna Placement
 
-### ESP32 PCB Antenna Keep-Out
+### Module PCB Antenna Keep-Out
 ```
 ┌─────────────────────────────┐
 │                             │
@@ -102,11 +102,17 @@ RF_IC ──┬──[===]──┬── ANT
 ```
 
 ### Critical Rules
-1. Antenna at board **edge**, facing **OUTWARD**
-2. 15×15mm zone: **NO copper on ANY layer** (including GND plane)
-3. No components, vias, mounting holes, or metal in zone
-4. Battery, headers, USB connectors: at least 15mm from antenna
-5. If using IPEX: microstrip from module to connector, keep <10mm
+1. Follow the **exact module datasheet** for keep-out dimensions and layer
+   requirements. Many 2.4 GHz modules show a 15 x 15 mm example, but this is
+   not universal.
+2. Antenna at the board edge, facing outward, unless the module documentation
+   specifies another arrangement.
+3. Keep the documented zone free of copper, components, vias, mounting holes,
+   battery, and metal.
+4. Keep batteries, headers, USB connectors, and enclosure hardware outside the
+   documented clearance.
+5. For IPEX/U.FL, follow the module's RF trace, connector, and ground-via
+   reference design. A coaxial connector does not remove all layout rules.
 
 ### Ground Plane Effect
 - PCB antenna needs ground plane to radiate effectively

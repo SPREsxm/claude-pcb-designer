@@ -15,14 +15,18 @@ signal trace.
 | 4-layer (L4 = signal, L3 = GND) | Same, but coupling to L3 not L2 | Good |
 
 **Consequence:** A slot or gap in the GND plane forces return currents to
-detour → increased EMI and crosstalk. **Never cut the L2 GND plane** with
-long traces. Use vias to drop signals to L4 if needed.
+detour, increasing EMI and crosstalk. Avoid cutting the L2 GND plane with
+long traces. Use vias to drop signals to L4 if needed, and provide a return
+via near the transition.
 
 ## Decoupling Capacitors
 
 ### Per IC
-- 0.1µF (100nF) ceramic cap on **every** VDD pin
-- Place **within 5mm** of the pin (closer = better)
+- Follow the datasheet's required capacitance and placement. A 0.1 uF ceramic
+  capacitor is a common starting point, but some rails require a different
+  value or a network of values.
+- Place the smallest, highest-frequency capacitor as close as practical to the
+  power/ground pin pair, with a short return loop.
 - Connect cap GND to IC GND pin with short trace, then to GND plane with via
 
 ### Bulk
@@ -48,8 +52,10 @@ Good:                            Bad:
 ## SPI High-Speed (40 MHz)
 
 ### Series Termination
-Place 22Ω resistors **at the source** (MCU side), as close to the GPIO pin
-as possible. This dampens reflections on the rising/falling edges.
+If the source impedance, edge rate, and trace length justify termination,
+place the damping resistor at the source (MCU side), as close to the GPIO pin
+as possible. Read the interface guidance and measure the actual waveform; not
+every SPI bus needs 22 ohm series resistors.
 
 ### Length Matching
 Match MOSI and SCLK lengths within the same SPI bus to ±2mm.
@@ -129,8 +135,10 @@ Board edge stitching:
 
 Before exporting Gerber, check:
 - [ ] L2 GND plane has NO long slots or cuts
-- [ ] Every VDD pin has a decoupling cap within 5mm
-- [ ] SPI MOSI/SCLK have 22Ω series termination at MCU
+- [ ] Every VDD pin has decoupling that satisfies the datasheet and is placed
+      as close as practical to the pin
+- [ ] SPI MOSI/SCLK termination is present when justified, or intentionally
+      omitted with a documented signal-integrity reason
 - [ ] SPI traces don't run parallel to I2C for >5mm
 - [ ] Antenna keep-out zone is clear on ALL layers (no GND plane)
 - [ ] USB ESD protection is at the connector, short path to GND

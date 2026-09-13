@@ -32,7 +32,7 @@ Rp(min) = (Vcc - Vol(max)) / Iol
 
 Rp(max) = tr / (0.8473 × Cbus)
          = 300ns / (0.8473 × 100pF) ≈ 3.5kΩ
-         
+
 Typical: 4.7kΩ (standard mode), 2.2kΩ (fast mode)
 ```
 

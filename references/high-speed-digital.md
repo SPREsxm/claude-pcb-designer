@@ -24,7 +24,9 @@ Applies when signal rise time tr < 2× propagation delay (roughly >50MHz clock o
 - εr of substrate (higher εr = lower Z)
 - For differential: spacing s (closer = lower Zdiff)
 
-**Use Saturn PCB Toolkit or your fab's impedance calculator. Never guess.**
+Use the fabricator's stackup and impedance calculator or a field solver.
+Never release a controlled-impedance design based on a generic width table.
+See `stackup-and-impedance.md` for the planning workflow.
 
 ---
 

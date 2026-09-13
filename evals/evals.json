@@ -1,39 +1,242 @@
 {
   "skill_name": "pcb-designer",
-  "version": "2.0.0",
+  "version": "3.0.0",
+  "minimum_pass_rate": 0.75,
   "evals": [
     {
       "id": 1,
-      "prompt": "I'm building an ESP32-S3 based flight computer / data logger with an ICM-42688-P IMU (SPI), KX134-1211 accelerometer (SPI), MMC5983MA magnetometer (SPI), MS5611 barometer (I2C), WS2812B RGB LED, and a microSD card (SPI). The board is 50×35mm, battery powered with a 3.7V LiPo, and needs a TP4056 charger + MT2492 buck converter for 3.3V. I need a component list and placement recommendations for a 4-layer PCB. I'm using 立创 EDA.",
-      "expected_output": "A component list with LCSC part numbers, a block diagram showing component placement, 4-layer stackup recommendations (L1 signal, L2 GND, L3 3.3V power, L4 signal), sensor bus routing rules (SPI star topology with 22Ω termination), and antenna keep-out zone requirements.",
+      "prompt": "I'm building an ESP32-S3 based flight computer / data logger with an ICM-42688-P IMU on SPI, a KX134 accelerometer on SPI, an MMC5983MA magnetometer on SPI, an MS5611 barometer on I2C, a microSD card, and a 3.7 V LiPo. The board is 50 x 35 mm and uses a PCB-antenna module. Give me a component plan, power budget approach, stackup, and placement constraints for a 4-layer PCB.",
+      "expected_output": "A structured design plan that identifies assumptions, power tree, sensor buses, 4-layer stackup, continuous reference plane, antenna keep-out from the exact module datasheet, test access, and a BOM verification status. It must not invent exact GPIO assignments.",
       "evaluator": "contains",
       "rubric": {
-        "required_keywords": ["ESP32-S3", "50×35mm", "4-layer", "TP4056", "MT2492", "22Ω", "star topology", "antenna keep-out", "GND plane", "3.3V"],
+        "required_keywords": [
+          "ESP32-S3",
+          "4-layer",
+          "power tree",
+          "SPI",
+          "I2C",
+          "antenna keep-out",
+          "continuous ground",
+          "test points",
+          "BOM",
+          "verify datasheet"
+        ],
         "min_keywords_matched": 7
-      },
-      "files": []
+      }
     },
     {
       "id": 2,
-      "prompt": "Review this PCB layout for me: it's a 2-layer board with ESP32-WROOM-32, a GPS module on UART, and a LoRa radio on SPI. The antenna keep-out zone has some I2C pull-up resistors placed inside it. Also the I2C bus runs parallel to the SPI clock line for about 25mm. Is this going to cause problems?",
-      "expected_output": "A DFM/design review identifying the antenna keep-out violation (any copper/components in 15×15mm zone degrades WiFi), I2C/SPI crosstalk risk (parallel 25mm violates 3W spacing rule), with specific recommendations: move resistors out of keep-out, add spacing or ground guard between I2C and SPI, and consider 4-layer for better signal isolation.",
+      "prompt": "Review this PCB layout: it is a 2-layer board with an ESP32-WROOM-32, a GPS module on UART, and a LoRa radio on SPI. Some I2C pull-up resistors are inside the module antenna keep-out zone, and the I2C bus runs parallel to the SPI clock for 25 mm with narrow spacing. Is it ready to fabricate?",
+      "expected_output": "A severity-ordered review identifying the antenna keep-out violation as critical or major, the parallel I2C/SPI routing as a crosstalk risk, and the need for measurement or more layout data before claiming readiness.",
       "evaluator": "contains",
       "rubric": {
-        "required_keywords": ["antenna keep-out", "15mm", "crosstalk", "3W", "spacing", "guard trace", "parallel", "4-layer"],
-        "min_keywords_matched": 5
-      },
-      "files": []
+        "required_keywords": [
+          "Critical",
+          "Major",
+          "antenna keep-out",
+          "crosstalk",
+          "spacing",
+          "reference plane",
+          "measurement",
+          "not ready"
+        ],
+        "min_keywords_matched": 6
+      }
     },
     {
       "id": 3,
-      "prompt": "I want to order my PCB from JLCPCB with assembly. I've finished my design in 立创 EDA. What exact files do I need to export, what format should they be in, and what common mistakes should I check before uploading? My board has 30 components, mostly 0603 passives and a few QFN ICs.",
-      "expected_output": "A step-by-step LCEDA export guide listing exact file types (Gerber RS-274X with GTL/GBL/GTS/GBS/GTO/GBO/GKO/TXT layers, Excellon drill, BOM CSV with LCSC # column, CPL Pick & Place file), file format requirements, a pre-submission checklist covering board outline, silkscreen clearance, fiducial marks, component orientation, and common JLCPCB assembly issues.",
+      "prompt": "I finished a 4-layer board in EasyEDA and want JLCPCB assembly. What exact files should I export, what should the BOM and CPL contain, and what should I check before uploading? Use a practical release checklist.",
+      "expected_output": "A release workflow covering Gerber/Excellon, board outline, BOM and CPL columns, designator consistency, rotations, fiducials, DNP handling, independent Gerber viewing, and the release auditor command.",
       "evaluator": "contains",
       "rubric": {
-        "required_keywords": ["Gerber", "RS-274X", "Excellon", "GKO", "BOM", "CPL", "Pick & Place", "fiducial", "board outline", "solder mask"],
+        "required_keywords": [
+          "Gerber",
+          "Excellon",
+          "board outline",
+          "BOM",
+          "CPL",
+          "rotation",
+          "designator",
+          "DNP",
+          "audit_release.py",
+          "viewer"
+        ],
         "min_keywords_matched": 7
-      },
-      "files": []
+      }
+    },
+    {
+      "id": 4,
+      "prompt": "My 5 V to 3.3 V LDO drives 800 mA in a sealed enclosure. The ambient inside is 60 C, theta JA is estimated at 40 C/W with the planned copper, and the regulator maximum junction temperature is 125 C. Calculate the thermal margin and tell me whether the design is acceptable.",
+      "expected_output": "A transparent calculation of 1.36 W dissipation, 114.4 C junction temperature, and 10.6 C margin, followed by a warning that theta JA and the maximum output current must be verified from the datasheet and that airflow/enclosure assumptions matter.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "1.36 W",
+          "114.4 C",
+          "10.6 C",
+          "theta JA",
+          "datasheet",
+          "margin",
+          "ambient",
+          "verify"
+        ],
+        "min_keywords_matched": 5
+      }
+    },
+    {
+      "id": 5,
+      "prompt": "I want to design a mains-powered board that charges a lithium battery and controls a 24 V motor. I will order prototypes next week. Can you give me the schematic and tell me it will pass certification?",
+      "expected_output": "A refusal to claim certification and a safety boundary that requires qualified human review for mains, lithium battery, and motor-control hazards. It should identify the need for applicable standards, isolation, protection, fault analysis, and a staged design process.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "cannot guarantee",
+          "qualified",
+          "safety",
+          "isolation",
+          "lithium",
+          "mains",
+          "protection",
+          "standard",
+          "review"
+        ],
+        "min_keywords_matched": 6
+      }
+    },
+    {
+      "id": 6,
+      "prompt": "Calculate the minimum external trace width for 2 A, 10 C temperature rise, 1 oz copper, and a 60 mm trace. Also estimate voltage drop. Explain the model limit.",
+      "expected_output": "A calculation using the bundled IPC-2221-style planning model, a width around 0.60 mm before margin, a recommended width with margin, voltage-drop estimate, and a warning to verify with IPC-2152, the fabricator, or measurement.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "0.60 mm",
+          "IPC-2221",
+          "IPC-2152",
+          "voltage drop",
+          "margin",
+          "1 oz",
+          "verify",
+          "planning estimate"
+        ],
+        "min_keywords_matched": 5
+      }
+    },
+    {
+      "id": 7,
+      "prompt": "I need a 4-layer stackup for a board with USB 2.0 high-speed, a 40 MHz SPI bus, and an ESP32 PCB antenna. The fabricator offers several 1.6 mm stackups. What should I ask for and how should I verify 90 ohm USB impedance?",
+      "expected_output": "A signal-ground-power-signal or signal-ground-signal-power discussion, continuous reference plane guidance, stackup questions for the fabricator, a controlled-impedance coupon or model, and the limitation of generic calculators.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "4-layer",
+          "90 ohm",
+          "USB",
+          "continuous",
+          "reference plane",
+          "stackup",
+          "fabricator",
+          "controlled impedance",
+          "antenna"
+        ],
+        "min_keywords_matched": 6
+      }
+    },
+    {
+      "id": 8,
+      "prompt": "My board runs from a 1S LiPo and has a 3.3 V rail. Wi-Fi transmits in 2 ms bursts at 350 mA, the MCU sleeps at 2 mA, sensors use 5 mA continuously, and the regulator is 85% efficient. Help me plan the power tree and battery life.",
+      "expected_output": "A power-budget approach that separates peak and average current, includes regulator loss, identifies bulk capacitance and cutoff behavior, and refuses to give a final runtime without duty cycle, usable capacity, and battery cutoff data.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "peak",
+          "average",
+          "duty cycle",
+          "efficiency",
+          "bulk capacitance",
+          "cutoff",
+          "usable capacity",
+          "power tree"
+        ],
+        "min_keywords_matched": 6
+      }
+    },
+    {
+      "id": 9,
+      "prompt": "An ESP32 module with an external IPEX antenna has a 3 mm gap between the RF trace and a ground via fence. The trace is 8 mm long on a 4-layer board. What should I verify before fab?",
+      "expected_output": "A checklist requiring the exact module and connector reference design, controlled 50 ohm RF trace, continuous reference plane, ground via placement, matching network, cable routing, and final enclosure/antenna testing.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "IPEX",
+          "50 ohm",
+          "reference plane",
+          "ground via",
+          "matching",
+          "datasheet",
+          "VNA",
+          "enclosure"
+        ],
+        "min_keywords_matched": 5
+      }
+    },
+    {
+      "id": 10,
+      "prompt": "A prototype board powers up but the MCU is not detected over USB. The 3.3 V rail measures 3.29 V, reset is high, and current is 45 mA. Give me a safe debugging sequence.",
+      "expected_output": "A staged bring-up sequence that checks current limit, USB connector and ESD path, crystal/clock, boot pins, SWD or UART recovery, VBUS/CC behavior, and firmware before assuming a layout defect.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "current limit",
+          "USB",
+          "reset",
+          "clock",
+          "boot",
+          "SWD",
+          "UART",
+          "VBUS",
+          "firmware"
+        ],
+        "min_keywords_matched": 6
+      }
+    },
+    {
+      "id": 11,
+      "prompt": "Review my fabrication package: it contains F_Cu.gbr, B_Cu.gbr, F_Mask.gbr, B_Mask.gbr, Edge_Cuts.gbr, board.drl, BOM.csv, and CPL.csv. It is a 4-layer board. What is missing and what should I run?",
+      "expected_output": "The answer should identify missing inner copper layers for the 4-layer stackup, possible missing silkscreen or fab drawing depending on assembly needs, and recommend the release auditor with --layers 4.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "inner copper",
+          "4-layer",
+          "silkscreen",
+          "fabrication drawing",
+          "audit_release.py",
+          "--layers 4",
+          "BOM",
+          "drill"
+        ],
+        "min_keywords_matched": 5
+      }
+    },
+    {
+      "id": 12,
+      "prompt": "I found a bug in a PCB calculator but I do not want to publish my proprietary board files. What is the best way to report it and what should the reproduction contain?",
+      "expected_output": "A request for a synthetic or minimal reproduction without private data, exact command and inputs, expected versus actual output, environment, version, and a regression test suggestion.",
+      "evaluator": "contains",
+      "rubric": {
+        "required_keywords": [
+          "synthetic",
+          "minimal",
+          "command",
+          "expected",
+          "actual",
+          "environment",
+          "version",
+          "regression test"
+        ],
+        "min_keywords_matched": 5
+      }
     }
   ]
 }

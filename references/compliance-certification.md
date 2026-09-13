@@ -1,5 +1,10 @@
 # Compliance & Certification
 
+Certification requirements depend on the final product, antenna, enclosure,
+cables, power source, and target market. This reference is planning material,
+not legal or certification advice. Confirm current requirements with an
+accredited lab or qualified compliance professional.
+
 ## Quick Reference by Market
 
 | Market | EMC | Safety | Radio | Environmental |

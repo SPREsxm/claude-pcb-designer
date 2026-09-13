@@ -1,142 +1,274 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/PCB%20Designer-v2.0.0-blue?style=for-the-badge" alt="version">
-  <img src="https://img.shields.io/badge/Modules-23-brightgreen?style=for-the-badge" alt="modules">
-  <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="license">
-  <img src="https://img.shields.io/badge/Claude%20Code-Skill-orange?style=for-the-badge" alt="claude-code-skill">
-</p>
+<div align="center">
 
-<h1 align="center">🧠 PCB Designer</h1>
-<h3 align="center">Claude Code Skill — Full-Stack Embedded Hardware Design</h3>
+# PCB Designer
 
-<p align="center">
-  Turn Claude into a professional PCB engineer.<br>
-  From schematic review to Gerber export — 23 modules covering every aspect of board design.
-</p>
+**An open Agent Skill that turns AI coding agents into disciplined PCB design,
+review, and fabrication-release partners.**
 
----
+<img src="assets/social-preview.png" alt="PCB Designer - open Agent Skill for design, review, calculation, and release" width="100%">
 
-## Why This Skill?
+[![CI](https://github.com/SPREsxm/claude-pcb-designer/actions/workflows/validate.yml/badge.svg)](https://github.com/SPREsxm/claude-pcb-designer/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/tag/SPREsxm/claude-pcb-designer?label=release)](https://github.com/SPREsxm/claude-pcb-designer/releases)
+[![License](https://img.shields.io/github/license/SPREsxm/claude-pcb-designer)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/SPREsxm/claude-pcb-designer?style=social)](https://github.com/SPREsxm/claude-pcb-designer/stargazers)
 
-Designing a PCB involves **dozens of decisions** across multiple domains — power, RF, signal integrity, thermal, DFM, compliance. Most engineers learn these over years of trial and error.
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-**This skill gives Claude instant expertise in ALL of them.**
+</div>
 
-Ask Claude anything about PCB design, and it draws from 17 reference documents covering the full lifecycle.
+PCB Designer covers the full hardware path: requirements, component selection,
+schematic review, stackup, placement, routing, power, signal integrity,
+thermal design, DFM/DFA, fabrication release, compliance planning, and board
+bring-up.
 
----
+It works with Codex, Claude Code, and other tools that understand the
+[Agent Skills](https://agentskills.io/) format.
 
-## What It Covers
+## Why This Skill Is Different
 
-<table>
-<tr><th colspan="2">🧠 Design Intelligence</th></tr>
-<tr><td>🔌 <b>Power</b></td><td>LDO thermal math, DC-DC topology (Buck/Boost/SEPIC), LiPo 1S-4S, solar MPPT, USB PD</td></tr>
-<tr><td>📡 <b>RF & Antenna</b></td><td>Microstrip width calculation, Smith chart matching, PCB/ceramic/external antennas, shielding</td></tr>
-<tr><td>⚡ <b>High-Speed</b></td><td>DDR routing, 50Ω/90Ω/100Ω impedance control, 3W/5W crosstalk, via stub effects</td></tr>
-<tr><td>🌡️ <b>Analog</b></td><td>Op-amp GBW/slew rate selection, ADC front-end, anti-aliasing filters, current sensing</td></tr>
-<tr><td>🔗 <b>Interfaces</b></td><td>CAN (120Ω termination), RS-485 (fail-safe bias), Ethernet (magnetics), USB 2.0, LVDS, MIPI, SDIO</td></tr>
-<tr><td>🌡️ <b>Thermal</b></td><td>Power budget, θJA/θJC calculation, copper area vs °C/W, thermal via arrays</td></tr>
-<tr><td>🛡️ <b>Protection</b></td><td>IEC 61000-4-2 ESD, TVS selection, surge, EMI π-filters, opto/magnetic/capacitive isolation</td></tr>
-<tr><td>🧠 <b>MCU Platforms</b></td><td>ESP32-S3/C3/C6, STM32 F1/F4/G0/H7, nRF52/53/54, RP2040/RP2350, CH32V, ATmega</td></tr>
+Most "PCB prompt packs" stop at generic advice. This project adds the parts
+that make hardware work repeatable:
 
-<tr><th colspan="2">🏭 Manufacturing & Production</th></tr>
-<tr><td>⚙️ <b>DFM</b></td><td>94-point checklist: schematic → layout → pours → RF → silkscreen → power → HS → mechanical → export</td></tr>
-<tr><td>📐 <b>Materials</b></td><td>FR-4 vs Rogers/Isola, ENIG vs HASL vs OSP, HDI microvias, FPC, rigid-flex, metal-core</td></tr>
-<tr><td>🏭 <b>Production</b></td><td>Stencil aperture design, SAC305 reflow profile, SPI/AOI/X-ray inspection, panelization, ESD packaging</td></tr>
+- **Evidence-first reasoning** - datasheets, supplier stackups, and actual
+  project files outrank generic rules.
+- **Deterministic calculators** - trace width, via current, impedance, LDO
+  thermal margin, battery life, buck inductors, RC filters, dividers, and
+  power budgets are computed by scripts, not guessed.
+- **Release auditing** - a dependency-free tool checks Gerber/drill presence,
+  BOM/CPL columns, designator consistency, and common packaging mistakes.
+- **Progressive disclosure** - a concise `SKILL.md` routes to focused
+  references only when needed.
+- **Safety boundaries** - mains, lithium batteries, medical, automotive,
+  aerospace, and other critical domains explicitly require qualified human
+  review.
+- **CI-tested** - the calculators, release auditor, references, and skill
+  metadata are validated on every push.
 
-<tr><th colspan="2">📋 Compliance & Verification</th></tr>
-<tr><td>📋 <b>Compliance</b></td><td>FCC Part 15 ($3-15k), CE RED (€5-20k), UL, RoHS, REACH — with timeline estimates</td></tr>
-<tr><td>🧪 <b>Testing</b></td><td>Test point strategy, SWD/JTAG/SWD header design, ICT fixture, flying probe, functional test</td></tr>
-<tr><td>⚡ <b>EMC</b></td><td>Return paths, decoupling loop area, SPI termination, GND stitching, antenna keep-out</td></tr>
+## What Changed in v3
 
-<tr><th colspan="2">📦 Patterns & Workflows</th></tr>
-<tr><td>💰 <b>Cost</b></td><td>BOM optimization, PCB fab & assembly cost reduction, panel utilization, quantity vs price analysis</td></tr>
-<tr><td>📦 <b>10+ Circuits</b></td><td>ESP32 boot, SPI star bus, I2C bus, LiPo charger, DC-DC buck, USB-C ESD, buzzer driver, battery ADC</td></tr>
-<tr><td>🎨 <b>EDA Tools</b></td><td>立创 EDA Pro (primary) + KiCad 8.x — with keyboard shortcuts and export workflows</td></tr>
-</table>
+- Added 11 deterministic calculator commands with JSON output.
+- Added a release auditor for Gerber, drill, BOM, and CPL packages.
+- Added a package validator and cross-platform CI.
+- Split the monolithic guidance into focused, progressively loaded references.
+- Added design, review, release, RFQ, power-budget, and bring-up templates.
+- Added 12 realistic behavioral evals and Chinese documentation.
+- Added explicit safety and verification boundaries.
 
----
+## Install
 
-## Quick Start
+### Codex
 
 ```bash
-cd ~/.claude/skills/
-git clone https://github.com/SPREsxm/claude-pcb-designer.git pcb-designer
+git clone https://github.com/SPREsxm/claude-pcb-designer.git
+cd claude-pcb-designer
+python scripts/install.py --target codex --force
 ```
 
-Done. Claude auto-loads it when you mention PCB design. Zero dependencies.
+### Claude Code
 
-## Usage Examples
-
-**Design a new board:**
-> "I'm building an ESP32-S3 data logger with an ICM-42688 IMU (SPI), MMC5983MA magnetometer (SPI), MS5611 barometer (I2C), microSD card, and a 3.7V LiPo battery on a 50×35mm 4-layer board. Help me pick components and plan the layout."
-
-**Review before fab:**
-> "Review my schematic and PCB layout for DFM issues before I send it to JLCPCB."
-
-**Tough trade-off:**
-> "Should I use a 2-layer or 4-layer board? What's the cost difference at JLCPCB for 100 pcs?"
-
-**Debug a problem:**
-> "My SPI bus at 40MHz is unreliable. How should I route it, and do I need termination resistors?"
-
-Claude invokes the skill automatically and applies the right reference documents.
-
----
-
-## Stack
-
-```
-📁 pcb-designer/
-├── SKILL.md                        ← 23 modules, main skill logic
-├── README.md
-├── LICENSE (MIT)
-├── .gitignore
-├── evals/
-│   └── evals.json
-└── references/
-    ├── lceda-workflow.md           ← 立创 EDA Pro: schematic → PCB → Gerber
-    ├── kicad-workflow.md           ← KiCad 8.x alternative
-    ├── power-design.md             ← LDO, DC-DC, battery, solar, USB PD
-    ├── analog-design.md            ← Op-amps, ADC, filters, current sense
-    ├── rf-design.md                ← Microstrip, antenna, matching network
-    ├── high-speed-digital.md       ← DDR, impedance, crosstalk, length matching
-    ├── communication-interfaces.md ← CAN, RS-485, Ethernet, USB, LVDS, MIPI
-    ├── thermal-design.md           ← Power budgets, θJA, heatsink copper area
-    ├── protection-reliability.md   ← ESD, surge, EMI, isolation, IPC standards
-    ├── testing-debug.md            ← Test points, JTAG/SWD, ICT, production test
-    ├── compliance-certification.md ← FCC, CE, UL, RoHS — costs & timelines
-    ├── manufacturing-production.md ← Stencil, reflow, SPI/AOI, panelization
-    ├── mcu-platforms.md            ← ESP32/STM32/nRF/RP2040/CH32V reference
-    ├── pcb-materials.md            ← FR-4, Rogers, ENIG, HDI, FPC, metal-core
-    ├── cost-optimization.md        ← BOM, PCB fab, and assembly cost reduction
-    ├── dfm-checklist.md            ← 94-point pre-export check
-    ├── evals/
-    │   └── evals.json              ← Evaluation prompts with rubrics
-    ├── emc-guidelines.md           ← Return paths, decoupling, termination
-    └── layer-choice.md             ← 2L vs 4L decision matrix
+```bash
+python scripts/install.py --target claude --force
 ```
 
----
+### Generic Agent Skills directory
 
-## Pair with easyeda-api-skill
+```bash
+python scripts/install.py --target agents --force
+```
 
-For **programmatic control** of 立创 EDA Pro (auto-placement, routing, DRC via WebSocket):
+The installer copies only the runtime skill package: `SKILL.md`,
+`references/`, `scripts/`, `templates/`, `rules/`, and the examples.
 
-| Skill | Role |
-|-------|------|
-| `pcb-designer` | 🧠 **Design brain** — what to do and why |
-| `easyeda-api-skill` | 🤖 **Automation hands** — API control of EDA |
+If the target is already a Git checkout, update it with `git pull --ff-only`
+instead of replacing the directory.
 
----
+## Try It
 
-## License
+```text
+Design an ESP32-S3 sensor board with SPI IMU, I2C barometer, microSD,
+USB-C charging, and a 1S LiPo. The enclosure is plastic, the board is
+50 x 35 mm, and the prototype quantity is 10.
+```
 
-MIT © [SPREsxm](https://github.com/SPREsxm)
+```text
+Review this KiCad layout for fabrication blockers, return-path problems,
+thermal risks, and missing test access. Lead with the findings and cite
+the exact file or net for each one.
+```
+
+```text
+My 5 V to 3.3 V LDO runs at 800 mA in a sealed enclosure at 60 C.
+Check dropout and thermal margin, then recommend a better topology.
+```
+
+```text
+Audit my release folder before I send it to JLCPCB assembly.
+```
+
+## What Is Included
+
+| Area | Coverage |
+|---|---|
+| Design intake | Requirements, environment, mechanical constraints, compliance, test strategy |
+| Schematic | Power, grounding, interfaces, analog, RF, high-speed, testability, ERC |
+| Stackup | 2/4/6-layer planning, reference planes, impedance, controlled impedance |
+| Layout review | Critical/major/minor findings with evidence and concrete fixes |
+| Power | LDO/DC-DC, battery, charging, protection, sequencing, current paths |
+| Signal integrity | USB, SPI, I2C, CAN, RS-485, Ethernet, LVDS/MIPI, SDIO, clocks |
+| RF | Antenna keep-out, matching, reference planes, shielding, coexistence |
+| Thermal | Junction temperature, copper area, thermal vias, enclosure effects |
+| Manufacturing | DRC, DFM, panelization, stencil, reflow, inspection, BOM, CPL |
+| Release | Gerber/drill audit, release manifest, revision control, supplier notes |
+| Bring-up | First power, rails, clocks, programming, interfaces, thermal soak |
+| High reliability | Derating, fault analysis, environmental stress, evidence package |
+| Tools | EasyEDA/嘉立创EDA and KiCad workflows, plus optional EasyEDA API pairing |
+
+## Bundled Tools
+
+### PCB Calculator
+
+```bash
+python scripts/pcbcalc.py --help
+
+python scripts/pcbcalc.py trace-width \
+  --current-a 1.0 --temp-rise-c 10 --copper-oz 1
+
+python scripts/pcbcalc.py microstrip \
+  --height-mm 0.20 --er 4.3 --target-ohm 50
+
+python scripts/pcbcalc.py diff-microstrip \
+  --height-mm 0.20 --er 4.3 --spacing-mm 0.18 --target-ohm 90
+
+python scripts/pcbcalc.py ldo \
+  --vin 5 --vout 3.3 --current-a 0.8 \
+  --theta-ja-c-per-w 40 --ambient-c 60
+
+python scripts/pcbcalc.py power-budget --csv templates/power-budget.csv
+```
+
+Every command supports `--json` for agent-to-agent workflows.
+
+### Release Auditor
+
+```bash
+python scripts/audit_release.py path/to/release --layers 4 --json
+```
+
+The auditor checks:
+
+- top/bottom copper, mask, outline, and drill presence;
+- expected inner copper for 4+ layer boards;
+- empty or structurally suspicious Gerber/drill files;
+- BOM columns, quantities, duplicate designators, and DNP flags;
+- CPL columns and duplicate placements;
+- BOM/CPL designator consistency;
+- optional PCB-only versus assembly-release mode.
+
+It cannot prove electrical correctness or certify a fabrication process.
+
+### Skill Validator
+
+```bash
+python scripts/validate_skill.py .
+python -m unittest discover -s tests -v
+```
+
+The validator checks frontmatter, local references, JSON, eval structure, and
+unfinished placeholders. CI runs it on Windows, Linux, and macOS.
+
+### Portable Package
+
+```bash
+python scripts/package_skill.py
+```
+
+This creates a deterministic runtime package under `dist/` with the skill,
+references, tools, templates, rules, examples, and documentation. GitHub
+release tags attach the ZIP automatically.
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A[Requirements] --> B[Architecture]
+    B --> C[Schematic + ERC]
+    C --> D[Stackup + Layout]
+    D --> E[Review + DRC]
+    E --> F[Release Audit]
+    F --> G[Fab + Assembly]
+    G --> H[Bring-Up]
+    H --> I[Validation + Revision]
+```
+
+The skill enforces five gates:
+
+1. requirements and safety boundary;
+2. architecture, power tree, and schematic review;
+3. stackup, placement, routing, and DRC;
+4. fabrication and assembly release;
+5. bring-up, measurement, and revision control.
+
+## Repository Map
+
+```text
+pcb-designer/
+|-- SKILL.md                    # Agent entrypoint and mode router
+|-- references/                 # Focused design and review knowledge
+|-- scripts/                    # Calculators, auditor, validator, installer
+|-- templates/                  # Briefs, review reports, release and bring-up logs
+|-- rules/                      # Machine-readable profiles and severity model
+|-- examples/                   # Worked design and review examples
+|-- evals/                      # Behavioral evaluation prompts
+|-- tests/                      # Unit and integration tests
+`-- .github/                    # CI and contribution templates
+```
+
+## Pair With EasyEDA API
+
+Use this skill as the **design brain** and the EasyEDA API skill as the
+**automation hands**:
+
+| Skill | Responsibility |
+|---|---|
+| `pcb-designer` | Requirements, calculations, design decisions, review, release |
+| `easyeda-api` | Live EasyEDA Pro project, schematic, PCB, library, and bridge operations |
+
+The correct English name is **EasyEDA**; the Chinese name is **嘉立创EDA**.
+
+## Quality and Limits
+
+This project is engineering assistance, not a substitute for:
+
+- a qualified engineer's review;
+- component datasheets and errata;
+- the fabricator's current capability and stackup data;
+- accredited EMC, safety, or radio compliance testing;
+- physical measurement, thermal testing, and manufacturing inspection.
+
+Supplier rules and prices change. Values in `rules/fab-profiles.json` carry a
+verification status and must be checked at order time.
 
 ## Contributing
 
-Issues & PRs welcome. Areas to grow:
-- Altium / OrCAD / Eagle workflow guides
-- PCBWay / OSH Park fab support
-- Motor drivers, battery gauges, RF module patterns
-- More eval prompts for edge cases
+Contributions are welcome, especially:
+
+- validated supplier profiles and stackups;
+- new interface or sensor patterns with datasheet references;
+- additional calculator tests and edge cases;
+- review examples from real re-spins;
+- Chinese/English documentation improvements.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+<div align="center">
+
+If this saves a re-spin, star the repository so the next hardware agent can
+find it.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SPREsxm/claude-pcb-designer&type=Date)](https://star-history.com/#SPREsxm/claude-pcb-designer&Date)
+
+</div>

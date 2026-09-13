@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/SPREsxm/claude-pcb-designer/security/advisories/new
+    about: Report a security vulnerability privately.
+  - name: Design help
+    url: https://github.com/SPREsxm/claude-pcb-designer/discussions
+    about: Ask a design question or share a board review.

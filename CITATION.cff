@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this skill in research, teaching, or a hardware project, cite the repository."
+title: "PCB Designer: An Open Agent Skill for PCB Design and Review"
+type: software
+authors:
+  - family-names: "SPREsxm"
+    alias: "RocketBlackBox"
+repository-code: "https://github.com/SPREsxm/claude-pcb-designer"
+url: "https://github.com/SPREsxm/claude-pcb-designer"
+license: MIT
+version: "3.0.0"
+date-released: "2026-09-13"
+keywords:
+  - pcb-design
+  - hardware
+  - embedded-systems
+  - kicad
+  - easyeda
+  - agent-skills

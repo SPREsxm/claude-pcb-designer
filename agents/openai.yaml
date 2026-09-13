@@ -1,0 +1,8 @@
+interface:
+  display_name: "PCB Designer"
+  short_description: "Design, review, and release PCBs with an AI agent."
+  brand_color: "#0B7A53"
+  default_prompt: "Use $pcb-designer to review my schematic and PCB release for fabrication blockers."
+
+policy:
+  allow_implicit_invocation: true
