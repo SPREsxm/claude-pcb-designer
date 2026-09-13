@@ -3,6 +3,14 @@
 All notable changes follow [Keep a Changelog](https://keepachangelog.com/) and
 semantic versioning.
 
+## [3.0.1] - 2026-09-13
+
+### Fixed
+
+- Allowed the package validator to run from a repository checkout whose folder
+  name differs from the skill name, such as `claude-pcb-designer`.
+- Added a regression path for repository-root and installed-skill validation.
+
 ## [3.0.0] - 2026-09-13
 
 ### Added

@@ -114,7 +114,7 @@ def generate(output: Path) -> None:
     draw.rectangle((76, 510, 620, 568), fill="#11382F", outline=TRACE, width=3)
     draw.text(
         (100, 523),
-        "v3.0.0   |   Codex + Claude + Agent Skills",
+        "v3.x   |   Codex + Claude + Agent Skills",
         font=font(25, True),
         fill=TEXT,
     )

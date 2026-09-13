@@ -4,7 +4,7 @@ description: Design, review, calculate, and release printed circuit boards for e
 license: MIT
 metadata:
   author: SPREsxm
-  version: "3.0.0"
+  version: "3.0.1"
   repository: https://github.com/SPREsxm/claude-pcb-designer
   keywords:
     - pcb

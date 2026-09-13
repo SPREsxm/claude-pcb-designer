@@ -109,8 +109,6 @@ def validate_frontmatter(root: Path, text: str) -> list[str]:
             issues.append("frontmatter name has invalid hyphen placement")
         if len(name) > 64:
             issues.append("frontmatter name exceeds 64 characters")
-        if name != root.name:
-            issues.append(f"frontmatter name '{name}' does not match folder '{root.name}'")
     description = frontmatter.get("description")
     if not isinstance(description, str) or not description.strip():
         issues.append("frontmatter description is required")

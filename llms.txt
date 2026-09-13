@@ -5,7 +5,7 @@
 
 Repository: https://github.com/SPREsxm/claude-pcb-designer
 License: MIT
-Version: 3.0.0
+Version: 3.0.1
 
 ## Primary Files
 

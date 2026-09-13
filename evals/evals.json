@@ -1,6 +1,6 @@
 {
   "skill_name": "pcb-designer",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "minimum_pass_rate": 0.75,
   "evals": [
     {

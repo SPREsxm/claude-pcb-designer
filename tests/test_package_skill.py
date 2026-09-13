@@ -11,7 +11,7 @@ from scripts.package_skill import package, skill_version
 class PackageSkillTests(unittest.TestCase):
     def test_package_contains_runtime_files(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        self.assertEqual(skill_version(root), "3.0.0")
+        self.assertEqual(skill_version(root), "3.0.1")
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "pcb-designer.zip"
             package(root, output)
